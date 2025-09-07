@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubdi Monastery - Ancient Retreat</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; }
+        .navbar { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 2rem; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #667eea; text-decoration: none; }
+        .back-btn { background: linear-gradient(45deg, #a8edea, #fed6e3); color: #333; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; }
+        /* Stunning Hero Section */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.3) 100%), 
+                        url('images/monastery2.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(168,237,234,0.1) 0%, transparent 70%);
+            animation: heroGlow 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes heroGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .hero-floating-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, rgba(168,237,234,0.9), rgba(254,214,227,0.9));
+            backdrop-filter: blur(15px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.3);
+            z-index: 3;
+            animation: floatingBadge 6s ease-in-out infinite;
+        }
+
+        @keyframes floatingBadge {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .floating-badge-text {
+            color: #333;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Beautiful Hero Text Section Below */
+        .hero-text-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            padding: 5rem 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-text-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="rgba(168,237,234,0.05)" opacity="0.8"><animate attributeName="cy" values="25;20;25" dur="10s" repeatCount="indefinite"/></circle><circle cx="75" cy="75" r="1.5" fill="rgba(254,214,227,0.05)" opacity="0.6"><animate attributeName="r" values="1.5;3;1.5" dur="12s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="2.5" fill="rgba(168,237,234,0.03)" opacity="0.4"><animate attributeName="cx" values="50;55;50" dur="14s" repeatCount="indefinite"/></circle></svg>');
+            opacity: 0.4;
+        }
+
+        .hero-text-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-main-content {
+            text-align: left;
+        }
+
+        .hero-stats-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .monastery-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.3));
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .badge-text {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(15px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #a8edea;
+        }
+
+        .stat-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            background: transparent;
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: none;
+            max-width: 800px;
+        }
+        .hero-content h1 { 
+            font-size: 4rem; 
+            font-weight: 800; 
+            margin-bottom: 1rem; 
+            text-shadow: 0 4px 20px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.8); 
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .hero-subtitle { 
+            font-size: 1.5rem; 
+            margin-bottom: 2rem; 
+            opacity: 0.8; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 1px 5px rgba(0,0,0,0.6);
+            color: rgba(255, 255, 255, 0.85);
+        }
+        .hero-description { 
+            font-size: 1.2rem; 
+            margin-bottom: 3rem; 
+            opacity: 0.75; 
+            max-width: 600px; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 1px 5px rgba(0,0,0,0.6);
+            color: rgba(255, 255, 255, 0.8);
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .content-section { padding: 8rem 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 3rem; font-weight: 800; text-align: center; margin-bottom: 4rem; color: #1a202c; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .feature-card { background: white; padding: 3rem 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s ease; }
+        .feature-card:hover { transform: translateY(-10px); }
+        .feature-icon { font-size: 3rem; margin-bottom: 1.5rem; }
+        .feature-card h4 { font-size: 1.5rem; margin-bottom: 1rem; color: #1a202c; }
+        .virtual-section { background: #f8fafc; text-align: center; }
+        .tour-preview { width: 200px; height: 200px; background: linear-gradient(45deg, #a8edea, #fed6e3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; cursor: pointer; transition: transform 0.3s ease; }
+        .tour-preview:hover { transform: scale(1.1); }
+        .tour-preview span { font-size: 4rem; color: #333; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; background: #1a202c; color: white; }
+        .info-card { background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; }
+        .info-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+        /* Map Section Styles - Dubdi (turquoise ↔ pink theme) */
+        .map-section {
+            background: linear-gradient(180deg, #fff 0%, #f7fdfc 100%);
+        }
+        .map-section .section-title {
+            color: #a8edea;
+        }
+        .map-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1.2fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+        .map-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.7));
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(168,237,234,0.25);
+            border-radius: 20px;
+            padding: 1.75rem;
+            box-shadow: 0 20px 40px rgba(168,237,234,0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .map-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 56px rgba(168,237,234,0.18);
+        }
+        .map-title {
+            display: inline-block;
+            padding: 10px 18px;
+            background: linear-gradient(45deg, rgba(168,237,234,0.2), rgba(254,214,227,0.25));
+            border: 1px solid rgba(168,237,234,0.35);
+            border-radius: 999px;
+            color: #2c7a7b;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+        }
+        .map-info-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .map-info-list li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(168,237,234,0.25);
+        }
+        .map-info-list li:last-child { border-bottom: none; }
+        .map-info-icon { font-size: 1.2rem; }
+        .map-info-text h4 { margin-bottom: 4px; color: #1a202c; }
+        .map-info-text p { margin: 0; color: #4a5568; }
+        .map-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 1rem;
+            text-decoration: none;
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            color: #333;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(168,237,234,0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .map-link:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(168,237,234,0.32); }
+        .map-iframe-container {
+            width: 100%;
+            height: 420px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(168,237,234,0.18);
+            border: 1px solid rgba(168,237,234,0.25);
+        }
+        .map-iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: saturate(1.05) contrast(1.02);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            
+            .hero-text-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            
+            .hero-main-content {
+                text-align: center;
+            }
+            
+            .hero-stats-visual {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .hero-floating-badge {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+            
+            .features-grid { grid-template-columns: 1fr; }
+            
+            .map-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+            
+            .map-iframe-container {
+                height: 250px !important;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="monastery360.html" class="logo">Monastery360</a>
+            <a href="monastery360.html" class="back-btn">← Back to Home</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-floating-badge">
+            <div class="floating-badge-text">🌿 Hermit's Retreat</div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="monastery-badge">
+                <span class="badge-text">Ancient Retreat</span>
+            </div>
+            <h1>Dubdi Monastery</h1>
+            <p class="hero-subtitle">Sikkim's Oldest Sanctuary</p>
+        </div>
+    </section>
+    
+    <!-- Hero Text Section with Key Information -->
+    <section class="hero-text-section">
+        <div class="hero-text-container">
+            <div class="hero-text-content">
+                <div class="hero-main-content">
+                    <div class="monastery-badge">
+                        <span class="badge-text">📅 Founded 1701</span>
+                    </div>
+                    <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.95);">The Hermit's Cell Above Sikkim's First Capital</h2>
+                    <p class="hero-description">Perched on a forested hill above Yuksom, Dubdi Monastery stands as Sikkim's oldest and most historically significant monastery. Founded in 1701 by Lhatsun Namkha Jigme, one of the three revered lamas who crowned Sikkim's first king, this ancient retreat offers a sacred pilgrimage through dense forests to a sanctuary of profound tranquility and spiritual wisdom.</p>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">1701</span>
+                            <span class="hero-stat-label">Founded</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">2,100m</span>
+                            <span class="hero-stat-label">Altitude</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">3km</span>
+                            <span class="hero-stat-label">Trek</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-stats-visual">
+                    <div class="stat-card">
+                        <span class="stat-icon">👑</span>
+                        <div class="stat-value">Royal</div>
+                        <div class="stat-description">Foundation</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🌲</span>
+                        <div class="stat-value">Forest</div>
+                        <div class="stat-description">Trek</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🎨</span>
+                        <div class="stat-value">Sacred</div>
+                        <div class="stat-description">Murals</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🧘</span>
+                        <div class="stat-value">Hermit</div>
+                        <div class="stat-description">Cell</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Founding and Historical Significance Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Founding and Historical Significance</h2>
+            <div class="history-content">
+                <p style="font-size: 1.1rem; margin-bottom: 2rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">The history of Dubdi is inextricably linked to the birth of the Kingdom of Sikkim. Its name, which translates to "the retreat" or "the hermit's cell," aptly captures the profound tranquility and spiritual seclusion that has defined it for over three centuries.</p>
+                
+                <div class="foundation-story" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); padding: 3rem; border-radius: 20px; margin-bottom: 3rem; color: #333;">
+                    <div style="text-align: center;">
+                        <h3 style="font-size: 2rem; margin-bottom: 1.5rem; color: #2d3748;">👑 Birth of the Kingdom</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.7;">Following the coronation of Phuntsog Namgyal as the first Chogyal (king) of Sikkim in 1642 by three revered lamas, one of them, <strong>Lhatsun Namkha Jigme</strong>, founded Dubdi Monastery in <strong>1701</strong>.</p>
+                    </div>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">👑</div>
+                        <h4>Royal Foundation</h4>
+                        <p>Established by Lhatsun Namkha Jigme, one of the three revered lamas who coronated Sikkim's first king in 1642.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🕉️</div>
+                        <h4>Nyingma Sect Center</h4>
+                        <p>Premier center for the Nyingma sect of Tibetan Buddhism, the oldest of the four main schools.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧘</div>
+                        <h4>Hermitage Purpose</h4>
+                        <p>Served as a hermitage for lamas seeking deep meditation, solidifying Buddhism as the state religion.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Location and Trek Section -->
+    <section class="content-section" style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title">Location and Trek</h2>
+            <div class="trek-content">
+                <p style="font-size: 1.1rem; margin-bottom: 3rem; text-align: center;">Located at an altitude of about 2,100 meters (7,000 feet), reaching Dubdi is a pilgrimage in itself.</p>
+                
+                <div class="trek-highlight" style="background: white; padding: 3rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 3rem;">
+                    <div style="text-align: center;">
+                        <h3 style="color: #667eea; margin-bottom: 1.5rem; font-size: 1.8rem;">🥾 Sacred Pilgrimage Trek</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">The monastery is accessible via a steep, approximately <strong>3-kilometer (1.9-mile) trek</strong> from Yuksom, which takes about an hour.</p>
+                        <p style="font-size: 1rem; color: #4a5568;">The path winds through a dense, verdant forest of oak and chestnut, offering a serene and picturesque journey with spectacular views of the Himalayan peaks, including the majestic Kanchenjunga range.</p>
+                    </div>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⛰️</div>
+                        <h4>2,100m Altitude</h4>
+                        <p>Perched at 7,000 feet above sea level, offering breathtaking Himalayan views and crisp mountain air.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌲</div>
+                        <h4>Forest Journey</h4>
+                        <p>Trek through dense oak and chestnut forests, creating a serene and meditative approach to the sacred site.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🙏</div>
+                        <h4>Pilgrimage Experience</h4>
+                        <p>The moderately challenging one-hour trek rewards visitors with profound peace and spiritual connection.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Architecture and Sacred Art Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Architecture and Sacred Art</h2>
+            <div class="architecture-content">
+                <p style="font-size: 1.1rem; margin-bottom: 3rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">Dubdi Monastery is a beautiful, two-storied stone structure that exemplifies traditional Sikkimese monastic architecture. Though modest in size, its interior is a treasure trove of religious art.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h4>Exquisite Murals</h4>
+                        <p>Walls adorned with elaborate painted murals depicting deities, saints, and Buddhist symbols in intricate detail.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🗿</div>
+                        <h4>Sacred Statues</h4>
+                        <p>Houses venerated statues of the three lamas who established the Sikkimese kingdom, along with rare manuscripts.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">✨</div>
+                        <h4>Gyaltshen Dome</h4>
+                        <p>Features a distinctive bell-shaped gilded dome on its roof, along with three weathered stupas and terraced gardens.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section virtual-section">
+        <div class="container">
+            <h2 class="section-title">Virtual Experience</h2>
+            <div class="tour-preview" onclick="alert('🎥 Virtual Tour Coming Soon!')">
+                <span>🎥</span>
+            </div>
+            <h3>360° Hermit's Sanctuary</h3>
+            <p>Experience the tranquil meditation caves and ancient retreat</p>
+        </div>
+    </section>
+    
+    <!-- Comprehensive Visiting Dubdi Monastery Section -->
+    <section class="content-section" style="background: #1a202c; color: white;">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Visiting Dubdi Monastery</h2>
+            <p style="text-align: center; font-size: 1.1rem; margin-bottom: 4rem; opacity: 0.9;">A visit to Dubdi Monastery is more than just a trip to a historical monument; it is a journey into the spiritual heart of Sikkim, offering a unique blend of history, culture, and natural beauty.</p>
+            
+            <div class="visit-details-comprehensive">
+                <div class="visit-section">
+                    <h3 style="color: #a8edea; margin-bottom: 2rem; text-align: center; font-size: 1.8rem;">🗺️ How to Reach</h3>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-icon">📍</div>
+                            <h4>Starting Point</h4>
+                            <p>The journey begins at Yuksom in West Sikkim - the historic first capital of the kingdom</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">🥾</div>
+                            <h4>Trek Duration</h4>
+                            <p>One-hour uphill trek through dense oak and chestnut forests to reach the monastery</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">⛰️</div>
+                            <h4>Distance & Altitude</h4>
+                            <p>3-kilometer trek (1.9 miles) to reach 2,100 meters (7,000 feet) above sea level</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="visit-section" style="margin-top: 4rem;">
+                    <h3 style="color: #a8edea; margin-bottom: 2rem; text-align: center; font-size: 1.8rem;">⏰ Timing & Best Seasons</h3>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-icon">⏰</div>
+                            <h4>Opening Hours</h4>
+                            <p>Generally open from 7:00 AM to 4:00 PM daily for visitors</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">🌸</div>
+                            <h4>Spring & Summer</h4>
+                            <p>March to May - Pleasant weather with blooming rhododendrons and clear mountain views</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">🍂</div>
+                            <h4>Autumn Season</h4>
+                            <p>September to November - Clear skies, comfortable trekking weather, and stunning vistas</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="visit-section" style="margin-top: 4rem;">
+                    <h3 style="color: #a8edea; margin-bottom: 2rem; text-align: center; font-size: 1.8rem;">🙏 Visitor Etiquette & Guidelines</h3>
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-icon">👚</div>
+                            <h4>Dress Code</h4>
+                            <p>Dress modestly as it is a revered place of worship. Remove shoes before entering the inner sanctum</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">🤫</div>
+                            <h4>Respectful Silence</h4>
+                            <p>Maintain silence and reverence within the monastery premises to preserve the meditative atmosphere</p>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">📸</div>
+                            <h4>Photography</h4>
+                            <p>Photography inside may be restricted - seek permission before taking photos of sacred spaces</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="visit-section" style="margin-top: 4rem;">
+                    <h3 style="color: #a8edea; margin-bottom: 2rem; text-align: center; font-size: 1.8rem;">🎫 Entry & Donations</h3>
+                    <div class="donation-info" style="background: rgba(168, 237, 234, 0.1); padding: 2rem; border-radius: 15px; text-align: center; border: 2px solid rgba(168, 237, 234, 0.3);">
+                        <p style="font-size: 1.1rem; line-height: 1.7;">While there is no official entry fee, it is customary and appreciated to leave a <strong>small donation</strong> for the upkeep of this historic site. Your contribution helps preserve this ancient sanctuary for future generations.</p>
+                    </div>
+                </div>
+                
+                <div class="spiritual-journey" style="background: rgba(168, 237, 234, 0.1); padding: 3rem; border-radius: 20px; margin-top: 4rem; text-align: center; border: 2px solid rgba(168, 237, 234, 0.3);">
+                    <h3 style="color: #a8edea; margin-bottom: 1.5rem; font-size: 1.8rem;">✨ A Journey into Sikkim's Spiritual Heart</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.7;">Experience the profound tranquility that has defined this hermit's cell for over three centuries. The trek through ancient forests, the sacred architecture, and the spiritual atmosphere combine to create a transformative pilgrimage experience in the birthplace of Sikkim's Buddhist heritage.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- West Sikkim Heritage Attractions & Sacred Sites Section -->
+    <section class="content-section" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: white; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="1.8" fill="rgba(255,255,255,0.1)" opacity="0.7"><animate attributeName="cy" values="30;25;30" dur="12s" repeatCount="indefinite"/></circle><circle cx="80" cy="65" r="2.2" fill="rgba(255,255,255,0.08)" opacity="0.5"><animate attributeName="cx" values="80;85;80" dur="14s" repeatCount="indefinite"/></circle><circle cx="45" cy="50" r="2.8" fill="rgba(255,255,255,0.06)" opacity="0.4"><animate attributeName="r" values="2.8;4.5;2.8" dur="16s" repeatCount="indefinite"/></circle></svg>'); opacity: 0.3;"></div>
+        
+        <div class="container" style="position: relative; z-index: 2;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <h2 style="font-size: 3rem; font-weight: 800; margin-bottom: 1rem; color: white; text-shadow: 0 4px 20px rgba(0,0,0,0.3);">🌸 Discover West Sikkim's Sacred Heritage</h2>
+                <p style="font-size: 1.2rem; opacity: 0.9; max-width: 800px; margin: 0 auto;">Explore ancient monasteries, sacred lakes, and royal heritage sites surrounding Dubdi Monastery in historic Yuksom</p>
+            </div>
+            
+            <!-- Nearby Sacred & Heritage Attractions Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">🏞️</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #ffd89b;">Khangchendzonga National Park</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">UNESCO World Heritage Site</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">A UNESCO World Heritage Site featuring rich biodiversity, rare flora, and spectacular views of the majestic Khangchendzonga peak - the world's third-highest mountain.</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">💧</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #ffd89b;">Khecheopalri Lake</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Sacred Wish-Fulfilling Lake</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">A sacred lake revered by both Buddhists and Hindus, known for its tranquil beauty and believed to fulfill the heartfelt wishes of pure-minded devotees.</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">⛩️</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #ffd89b;">Pemayangtse Monastery</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Perfect Sublime Lotus</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">One of the oldest and most important monasteries in Sikkim, founded in 1705, known for its royal associations and the magnificent seven-tiered wooden sculpture of Zangdog Palri.</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">👑</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #ffd89b;">Coronation Throne of Norbugang</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Historic Royal Site</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">The sacred historic site where the first Chogyal (king) of Sikkim was crowned in 1642 by three wise lamas, marking the birth of the Kingdom of Sikkim.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Accommodations & Essential Services Section -->
+    <section class="content-section" style="background: #f8fafc;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <h2 style="font-size: 3rem; font-weight: 800; color: #1a202c; margin-bottom: 1rem;">🏨 Historic Yuksom Accommodations & Services</h2>
+                <p style="font-size: 1.2rem; color: #4a5568; max-width: 800px; margin: 0 auto;">Comfortable stays and essential services for your pilgrimage to Dubdi Monastery in historic Yuksom, Sikkim's first capital</p>
+            </div>
+            
+            <!-- Hotel Accommodations -->
+            <div style="margin-bottom: 4rem;">
+                <h3 style="text-align: center; font-size: 2rem; color: #a8edea; margin-bottom: 3rem;">🏨 Nearby Hotel Options in Yuksom</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                    <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 50px rgba(168,237,234,0.1); border-left: 5px solid #a8edea; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <span style="font-size: 2.5rem; margin-right: 1rem;">🏨</span>
+                            <div>
+                                <h4 style="font-size: 1.4rem; color: #1a202c; margin-bottom: 0.5rem;">Yuksom Tourist Lodge</h4>
+                                <p style="color: #a8edea; font-weight: 600;">Government-Run • Budget-Friendly</p>
+                            </div>
+                        </div>
+                        <p style="color: #4a5568; line-height: 1.6;">A government-run facility offering basic accommodation suitable for budget travelers, providing clean and affordable lodging for pilgrims visiting Dubdi Monastery.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 50px rgba(168,237,234,0.1); border-left: 5px solid #a8edea; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <span style="font-size: 2.5rem; margin-right: 1rem;">🏰</span>
+                            <div>
+                                <h4 style="font-size: 1.4rem; color: #1a202c; margin-bottom: 0.5rem;">Hotel Norbuling</h4>
+                                <p style="color: #a8edea; font-weight: 600;">Yuksom • Mid-Range Comfort</p>
+                            </div>
+                        </div>
+                        <p style="color: #4a5568; line-height: 1.6;">Provides comfortable mid-range accommodation with necessary amenities for travelers seeking a balance of comfort and affordability while exploring West Sikkim's heritage sites.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 50px rgba(168,237,234,0.1); border-left: 5px solid #a8edea; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <span style="font-size: 2.5rem; margin-right: 1rem;">🏔️</span>
+                            <div>
+                                <h4 style="font-size: 1.4rem; color: #1a202c; margin-bottom: 0.5rem;">Hotel Norphel Retreat</h4>
+                                <p style="color: #a8edea; font-weight: 600;">Scenic Views • Simple Comfort</p>
+                            </div>
+                        </div>
+                        <p style="color: #4a5568; line-height: 1.6;">Offers simple rooms with scenic mountain views, providing a peaceful retreat experience for visitors exploring the spiritual heritage of Dubdi Monastery.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 50px rgba(168,237,234,0.1); border-left: 5px solid #a8edea; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <span style="font-size: 2.5rem; margin-right: 1rem;">🏡</span>
+                            <div>
+                                <h4 style="font-size: 1.4rem; color: #1a202c; margin-bottom: 0.5rem;">Local Homestays & Guesthouses</h4>
+                                <p style="color: #a8edea; font-weight: 600;">Yuksom Town • Authentic Experience</p>
+                            </div>
+                        </div>
+                        <p style="color: #4a5568; line-height: 1.6;">Several homestays and small guesthouses available in Yuksom town, providing affordable lodging options with authentic local hospitality and cultural immersion.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Transportation & Emergency Services -->
+            <div style="background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); padding: 3rem; border-radius: 25px; color: white;">
+                <h3 style="text-align: center; font-size: 2rem; color: #fed6e3; margin-bottom: 3rem;">🛡️ Transportation & Safety Services</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                    <!-- Transportation Info -->
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(15px);">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-size: 2rem; margin-right: 1rem;">🚌</span>
+                            <h4 style="color: #fed6e3; font-size: 1.2rem;">Yuksom Bus Stand</h4>
+                        </div>
+                        <p style="line-height: 1.6; opacity: 0.9; margin-bottom: 1rem;"><strong>Local Transportation Hub:</strong> Located in Yuksom town serving as the main connectivity point.</p>
+                        <p style="line-height: 1.6; opacity: 0.9; margin-bottom: 1rem;">Connects Yuksom to <strong>Pelling, Gangtok, Namchi</strong> and other places in Sikkim via shared taxis and buses.</p>
+                        <p style="line-height: 1.6; opacity: 0.9;">Frequency is lower than bigger cities, so plan travel accordingly for monastery visits.</p>
+                    </div>
+                    
+                    <!-- Police Services -->
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(15px);">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-size: 2rem; margin-right: 1rem;">🚓</span>
+                            <h4 style="color: #fed6e3; font-size: 1.2rem;">Yuksom Police Station</h4>
+                        </div>
+                        <p style="line-height: 1.6; opacity: 0.9; margin-bottom: 0.5rem;"><strong>Address:</strong> Yuksom, West Sikkim, Sikkim – 737 121</p>
+                        <p style="line-height: 1.6; opacity: 0.9; margin-bottom: 1rem;">Provides safety, law enforcement, and assistance in case of emergencies for monastery visitors and trekkers.</p>
+                        <div style="background: rgba(168,237,234,0.2); padding: 1rem; border-radius: 10px;">
+                            <p style="font-weight: 600; margin-bottom: 0.5rem;">Emergency Numbers:</p>
+                            <p>📞 <strong>112</strong> - General Emergency</p>
+                            <p>📞 <strong>100</strong> - Police Emergency</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Women's Safety Helpline -->
+                <div style="background: rgba(168,237,234,0.2); padding: 2.5rem; border-radius: 20px; border: 2px solid rgba(168,237,234,0.3); text-align: center;">
+                    <h4 style="color: #fed6e3; font-size: 1.5rem; margin-bottom: 1.5rem;">👩 Women's Safety & Helpline Support</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px;">
+                            <h5 style="color: #ffd89b; margin-bottom: 0.5rem;">Sikkim Women Helpline</h5>
+                            <p style="font-size: 1.2rem; font-weight: 700;">📞 181</p>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Dedicated women's support services</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px;">
+                            <h5 style="color: #ffd89b; margin-bottom: 0.5rem;">General Emergency</h5>
+                            <p style="font-size: 1.2rem; font-weight: 700;">📞 112</p>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">All-purpose emergency assistance</p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; opacity: 0.9; line-height: 1.6;">All helplines operate 24/7 with trained personnel ready to assist pilgrims and travelers in West Sikkim. Yuksom Police Station provides additional local support for visitors to sacred sites.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Map Section -->
+    <section class="content-section map-section">
+        <div class="container">
+            <h2 class="section-title">Location & Map</h2>
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-title">Dubdi Monastery</div>
+                    <ul class="map-info-list">
+                        <li>
+                            <div class="map-info-icon">📍</div>
+                            <div class="map-info-text">
+                                <h4>Address</h4>
+                                <p>Dubdi Hill, Yuksom, West Sikkim 737113</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="map-info-icon">⛰️</div>
+                            <div class="map-info-text">
+                                <h4>Altitude & Trek</h4>
+                                <p>2,100m elevation, 3km trek from Yuksom</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="map-info-icon">🗺️</div>
+                            <div class="map-info-text">
+                                <h4>Open in Google Maps</h4>
+                                <p>
+                                    <a class="map-link" href="https://maps.app.goo.gl/NZ5uth8LcsVzwaaG6" target="_blank" rel="noopener">Open Map ↗</a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="map-iframe-container">
+                    <iframe class="map-iframe" loading="lazy" allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps?q=Dubdi%20Monastery%2C%20Yuksom%2C%20Sikkim&output=embed">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enchey Monastery - City Sanctuary</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; }
+        .navbar { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 2rem; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #667eea; text-decoration: none; }
+        .back-btn { background: linear-gradient(45deg, #4facfe, #00f2fe); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; }
+        /* Stunning Hero Section */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.3) 100%), 
+                        url('images/encheymonas.png') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(79,172,254,0.1) 0%, transparent 70%);
+            animation: heroGlow 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes heroGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 1000px;
+            padding: 3rem;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-floating-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, rgba(79,172,254,0.9), rgba(0,242,254,0.9));
+            backdrop-filter: blur(15px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.3);
+            z-index: 3;
+            animation: floatingBadge 6s ease-in-out infinite;
+        }
+
+        @keyframes floatingBadge {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .floating-badge-text {
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Beautiful Hero Text Section Below */
+        .hero-text-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            padding: 5rem 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-text-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="rgba(79,172,254,0.05)" opacity="0.8"><animate attributeName="cy" values="25;20;25" dur="10s" repeatCount="indefinite"/></circle><circle cx="75" cy="75" r="1.5" fill="rgba(0,242,254,0.05)" opacity="0.6"><animate attributeName="r" values="1.5;3;1.5" dur="12s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="2.5" fill="rgba(79,172,254,0.03)" opacity="0.4"><animate attributeName="cx" values="50;55;50" dur="14s" repeatCount="indefinite"/></circle></svg>');
+            opacity: 0.4;
+        }
+
+        .hero-text-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-main-content {
+            text-align: left;
+        }
+
+        .hero-stats-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .monastery-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.3));
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .badge-text {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.8);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            font-weight: 400;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 1px 5px rgba(0,0,0,0.6);
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            opacity: 0.75;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 1px 5px rgba(0,0,0,0.6);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(15px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #4facfe;
+        }
+
+        .stat-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .content-section { padding: 8rem 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 3rem; font-weight: 800; text-align: center; margin-bottom: 4rem; color: #1a202c; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .feature-card { background: white; padding: 3rem 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s ease; }
+        .feature-card:hover { transform: translateY(-10px); }
+        .feature-icon { font-size: 3rem; margin-bottom: 1.5rem; }
+        .feature-card h4 { font-size: 1.5rem; margin-bottom: 1rem; color: #1a202c; }
+        .virtual-section { background: #f8fafc; text-align: center; }
+        .tour-preview { width: 200px; height: 200px; background: linear-gradient(45deg, #4facfe, #00f2fe); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; cursor: pointer; transition: transform 0.3s ease; }
+        .tour-preview:hover { transform: scale(1.1); }
+        .tour-preview span { font-size: 4rem; color: white; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; background: #1a202c; color: white; }
+        .info-card { background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; }
+        .info-icon { font-size: 2rem; margin-bottom: 1rem; }
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            
+            .hero-text-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            
+            .hero-main-content {
+                text-align: center;
+            }
+            
+            .hero-stats-visual {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .hero-floating-badge {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+            
+            .features-grid { grid-template-columns: 1fr; }
+            
+            .map-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+            
+            .map-iframe-container {
+                height: 250px !important;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="monastery360.html" class="logo">Monastery360</a>
+            <a href="monastery360.html" class="back-btn">← Back to Home</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-floating-badge">
+            <div class="floating-badge-text">🏰 City Views</div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="monastery-badge">
+                <span class="badge-text">City Sanctuary</span>
+            </div>
+            <h1>Enchey Monastery</h1>
+            <p class="hero-subtitle">Spiritual Overlook</p>
+        </div>
+    </section>
+    
+    <!-- Hero Text Section with Key Information -->
+    <section class="hero-text-section">
+        <div class="hero-text-container">
+            <div class="hero-text-content">
+                <div class="hero-main-content">
+                    <div class="monastery-badge">
+                        <span class="badge-text">🎭 Cultural Center</span>
+                    </div>
+                    <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.95);">Modern Monastery with Ancient Soul</h2>
+                    <p class="hero-description">Perched above Gangtok city, Enchey Monastery offers a unique blend of spiritual serenity and urban accessibility. Built in 1909, this picturesque monastery is renowned for its spectacular panoramic views and vibrant Chaam dance performances that draw devotees and cultural enthusiasts from around the world.</p>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">1909</span>
+                            <span class="hero-stat-label">Established</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">6,200ft</span>
+                            <span class="hero-stat-label">Altitude</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">Gangtok</span>
+                            <span class="hero-stat-label">Location</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-stats-visual">
+                    <div class="stat-card">
+                        <span class="stat-icon">🎭</span>
+                        <div class="stat-value">Chaam</div>
+                        <div class="stat-description">Dance Festival</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🌄</span>
+                        <div class="stat-value">City</div>
+                        <div class="stat-description">Panorama</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🚶</span>
+                        <div class="stat-value">Easy</div>
+                        <div class="stat-description">Access</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🏯</span>
+                        <div class="stat-value">Modern</div>
+                        <div class="stat-description">Heritage</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Sacred Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏛️</div>
+                    <h4>Built in 1909</h4>
+                    <p>Relatively modern monastery with traditional architecture overlooking Gangtok city.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎪</div>
+                    <h4>Chaam Dances</h4>
+                    <p>Famous for vibrant masked dance performances during religious festivals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌄</div>
+                    <h4>City Views</h4>
+                    <p>Spectacular panoramic views of Gangtok and surrounding valleys.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section virtual-section">
+        <div class="container">
+            <h2 class="section-title">Virtual Experience</h2>
+            <div class="tour-preview" onclick="alert('🎥 Virtual Tour Coming Soon!')">
+                <span>🎥</span>
+            </div>
+            <h3>360° City Sanctuary</h3>
+            <p>Explore this serene monastery with stunning city views</p>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Visit Information</h2>
+            <div class="info-grid">
+                <div class="info-card"><div class="info-icon">📍</div><h4>Location</h4><p>Gangtok, East Sikkim</p></div>
+                <div class="info-card"><div class="info-icon">⏰</div><h4>Hours</h4><p>6:00 AM - 6:00 PM</p></div>
+                <div class="info-card"><div class="info-icon">🌄</div><h4>Views</h4><p>Gangtok city panorama</p></div>
+                <div class="info-card"><div class="info-icon">🚶</div><h4>Access</h4><p>Easy walking distance</p></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Nearby Attractions & City Connections Section -->
+    <section class="content-section" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="35" r="1.5" fill="rgba(255,255,255,0.1)" opacity="0.7"><animate attributeName="cy" values="35;30;35" dur="10s" repeatCount="indefinite"/></circle><circle cx="75" cy="65" r="2" fill="rgba(255,255,255,0.08)" opacity="0.5"><animate attributeName="cx" values="75;80;75" dur="14s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="2.5" fill="rgba(255,255,255,0.06)" opacity="0.4"><animate attributeName="r" values="2.5;4;2.5" dur="16s" repeatCount="indefinite"/></circle></svg>'); opacity: 0.3;"></div>
+        
+        <div class="container" style="position: relative; z-index: 2;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <h2 style="font-size: 3rem; font-weight: 800; margin-bottom: 1rem; color: white; text-shadow: 0 4px 20px rgba(0,0,0,0.3);">🏙️ Discover Gangtok's Sacred & Cultural Treasures</h2>
+                <p style="font-size: 1.2rem; opacity: 0.9; max-width: 800px; margin: 0 auto;">Explore the vibrant attractions and spiritual sites surrounding Enchey Monastery in the heart of Sikkim's capital city</p>
+            </div>
+            
+            <!-- Nearby Attractions Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">🕉️</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #fff3cd;">Ganesh Tok</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">1 km away • Temple Views</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">A small but significant Ganesh temple offering spectacular panoramic views of Gangtok city and the surrounding hills. Perfect for a peaceful morning visit.</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">🐒</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #fff3cd;">Hanuman Tok</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">5 km • Scenic Viewpoint</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">Another beloved temple and scenic viewpoint dedicated to Lord Hanuman, offering breathtaking vistas of the Himalayas and Gangtok valley below.</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">📚</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #fff3cd;">Namgyal Institute of Tibetology</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">3 km • Cultural Museum</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">A renowned museum and research center dedicated to Tibetan culture, housing rare manuscripts, artifacts, and Buddhist art collections.</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">🏯</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #fff3cd;">Do-Drul Chorten Stupa</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">3 km • Famous Stupa</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">One of Gangtok's most famous and significant Buddhist stupas, surrounded by 108 prayer wheels and offering a deeply spiritual atmosphere.</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">🌺</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #fff3cd;">Flower Exhibition Centre</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Near Ridge Park • Orchid Garden</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">A beautiful showcase of Sikkim's exotic orchids and native flowers, featuring vibrant displays of the region's incredible botanical diversity.</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">🛍️</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #fff3cd;">MG Marg (Main Market)</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">2-3 km • Shopping & Dining</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">Gangtok's bustling pedestrian-only main street, perfect for shopping local handicrafts, enjoying delicious food, and experiencing the city's vibrant culture.</p>
+                </div>
+            </div>
+            
+            <!-- Transportation Hub -->
+            <div style="background: rgba(255,255,255,0.2); backdrop-filter: blur(25px); padding: 3rem; border-radius: 25px; margin-bottom: 4rem; border: 2px solid rgba(255,255,255,0.3);">
+                <h3 style="text-align: center; font-size: 2rem; margin-bottom: 2rem; color: #fff3cd;">🚌 Transportation & Connectivity</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div style="text-align: center; padding: 1.5rem;">
+                        <span style="font-size: 3rem; margin-bottom: 1rem; display: block;">🚍</span>
+                        <h4 style="color: #fff3cd; margin-bottom: 1rem;">SNT Bus Station (Deorali)</h4>
+                        <p>The main bus and shared jeep stand, about 3–4 km from Enchey Monastery. Shared jeeps and taxis are the most common transportation method.</p>
+                    </div>
+                    <div style="text-align: center; padding: 1.5rem;">
+                        <span style="font-size: 3rem; margin-bottom: 1rem; display: block;">🚕</span>
+                        <h4 style="color: #fff3cd; margin-bottom: 1rem;">Easy City Access</h4>
+                        <p>Being located in Gangtok, the monastery is easily accessible by foot, taxi, or local transport from anywhere in the city center.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Accommodations & Essential Services Section -->
+    <section class="content-section" style="background: #f8fafc;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <h2 style="font-size: 3rem; font-weight: 800; color: #1a202c; margin-bottom: 1rem;">🏨 Accommodation & Safety Services</h2>
+                <p style="font-size: 1.2rem; color: #4a5568; max-width: 800px; margin: 0 auto;">Comfortable stays and essential services for your spiritual journey to Enchey Monastery in Gangtok</p>
+            </div>
+            
+            <!-- Hotel Accommodations -->
+            <div style="margin-bottom: 4rem;">
+                <h3 style="text-align: center; font-size: 2rem; color: #4facfe; margin-bottom: 3rem;">🏨 Premium Hotels in Gangtok</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                    <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 50px rgba(79,172,254,0.1); border-left: 5px solid #4facfe; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <span style="font-size: 2.5rem; margin-right: 1rem;">🏰</span>
+                            <div>
+                                <h4 style="font-size: 1.4rem; color: #1a202c; margin-bottom: 0.5rem;">The Elgin Nor-Khill</h4>
+                                <p style="color: #4facfe; font-weight: 600;">Heritage Hotel • Royal Legacy</p>
+                            </div>
+                        </div>
+                        <p style="color: #4a5568; line-height: 1.6;">A magnificent heritage hotel offering old-world charm with modern luxury, featuring traditional Sikkimese architecture and royal hospitality in the heart of Gangtok.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 50px rgba(79,172,254,0.1); border-left: 5px solid #4facfe; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <span style="font-size: 2.5rem; margin-right: 1rem;">⛰️</span>
+                            <div>
+                                <h4 style="font-size: 1.4rem; color: #1a202c; margin-bottom: 0.5rem;">Summit Golden Crescent Resort & Spa</h4>
+                                <p style="color: #4facfe; font-weight: 600;">Mid-Luxury • Near Enchey</p>
+                            </div>
+                        </div>
+                        <p style="color: #4a5568; line-height: 1.6;">A premium mid-luxury resort located conveniently near Enchey Monastery, offering spa services, mountain views, and comfortable accommodations.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 50px rgba(79,172,254,0.1); border-left: 5px solid #4facfe; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <span style="font-size: 2.5rem; margin-right: 1rem;">🎰</span>
+                            <div>
+                                <h4 style="font-size: 1.4rem; color: #1a202c; margin-bottom: 0.5rem;">Mayfair Spa Resort & Casino</h4>
+                                <p style="color: #4facfe; font-weight: 600;">Luxury • Full Amenities</p>
+                            </div>
+                        </div>
+                        <p style="color: #4a5568; line-height: 1.6;">A luxury resort offering comprehensive amenities including spa services, casino, fine dining, and premium accommodations with stunning city views.</p>
+                    </div>
+                    
+                    <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 50px rgba(79,172,254,0.1); border-left: 5px solid #4facfe; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.style.transform='translateY(0)'">
+                        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                            <span style="font-size: 2.5rem; margin-right: 1rem;">🏠</span>
+                            <div>
+                                <h4 style="font-size: 1.4rem; color: #1a202c; margin-bottom: 0.5rem;">Budget-Friendly Options</h4>
+                                <p style="color: #4facfe; font-weight: 600;">Homestays & Guesthouses</p>
+                            </div>
+                        </div>
+                        <p style="color: #4a5568; line-height: 1.6;">Numerous homestays, guesthouses, and budget lodges throughout central Gangtok offering authentic local experiences and affordable accommodations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Emergency Services & Safety -->
+            <div style="background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); padding: 3rem; border-radius: 25px; color: white;">
+                <h3 style="text-align: center; font-size: 2rem; color: #00f2fe; margin-bottom: 3rem;">🛡️ Emergency Services & Safety Information</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(15px);">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-size: 2rem; margin-right: 1rem;">🚓</span>
+                            <h4 style="color: #00f2fe; font-size: 1.2rem;">Police Station</h4>
+                        </div>
+                        <p style="line-height: 1.6; opacity: 0.9; margin-bottom: 1rem;"><strong>Sadar Police Station, Gangtok:</strong> The main police station serving the area.</p>
+                        <div style="background: rgba(79,172,254,0.2); padding: 1rem; border-radius: 10px;">
+                            <p style="font-weight: 600; margin-bottom: 0.5rem;">Emergency Numbers:</p>
+                            <p>📞 <strong>100</strong> - Police Emergency</p>
+                            <p>📞 <strong>112</strong> - All-Purpose Emergency</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(15px);">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-size: 2rem; margin-right: 1rem;">🏥</span>
+                            <h4 style="color: #00f2fe; font-size: 1.2rem;">Medical Facilities</h4>
+                        </div>
+                        <p style="line-height: 1.6; opacity: 0.9;">Being in Gangtok city center, multiple hospitals, clinics, and pharmacies are easily accessible within a short distance from the monastery.</p>
+                    </div>
+                </div>
+                
+                <!-- Women's Safety Helpline -->
+                <div style="background: rgba(79,172,254,0.2); padding: 2.5rem; border-radius: 20px; border: 2px solid rgba(79,172,254,0.3); text-align: center;">
+                    <h4 style="color: #00f2fe; font-size: 1.5rem; margin-bottom: 1.5rem;">👩 Women's Safety & Helpline Support</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px;">
+                            <h5 style="color: #fff3cd; margin-bottom: 0.5rem;">National Women Helpline</h5>
+                            <p style="font-size: 1.2rem; font-weight: 700;">📞 1091</p>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Works across India, including Sikkim</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px;">
+                            <h5 style="color: #fff3cd; margin-bottom: 0.5rem;">Sikkim State Women Helpline</h5>
+                            <p style="font-size: 1.2rem; font-weight: 700;">📞 181</p>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">State-specific support services</p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; opacity: 0.9; line-height: 1.6;">Additional support available through local women's cells in West Sikkim (Gyalshing). All helplines operate 24/7 with trained personnel ready to assist.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Location & Map Section -->
+    <section style="background: #f8fafc; padding: 4rem 2rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 2.5rem; font-weight: 800; color: #4facfe; margin-bottom: 1rem;">📍 Find Enchey Monastery</h2>
+                <p style="font-size: 1.1rem; color: #4a5568; max-width: 600px; margin: 0 auto;">Located in the heart of Gangtok city, easily accessible from all major areas</p>
+            </div>
+            
+            <div class="map-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                <!-- Location Details -->
+                <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 40px rgba(79,172,254,0.1); border-left: 5px solid #4facfe;">
+                    <h3 style="color: #4facfe; margin-bottom: 2rem; font-size: 1.5rem;">🏛️ City Sanctuary Location</h3>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                            <span style="font-size: 1.2rem; margin-right: 0.8rem;">📍</span>
+                            <strong style="color: #1a202c;">Address:</strong>
+                        </div>
+                        <p style="color: #4a5568; margin-left: 2rem;">Enchey Monastery Road, Gangtok, East Sikkim 737101, India</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                            <span style="font-size: 1.2rem; margin-right: 0.8rem;">🚗</span>
+                            <strong style="color: #1a202c;">Distance:</strong>
+                        </div>
+                        <p style="color: #4a5568; margin-left: 2rem;">3 kilometers from Gangtok city center</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                            <span style="font-size: 1.2rem; margin-right: 0.8rem;">⏱️</span>
+                            <strong style="color: #1a202c;">Travel Time:</strong>
+                        </div>
+                        <p style="color: #4a5568; margin-left: 2rem;">10-15 minutes by car/taxi from city center</p>
+                    </div>
+                    
+                    <a href="https://maps.app.goo.gl/o2F6xd8sib1833Ci7" target="_blank" 
+                       style="display: inline-block; background: linear-gradient(45deg, #4facfe, #00f2fe); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: transform 0.3s ease;"
+                       onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        🗺️ Open in Google Maps
+                    </a>
+                </div>
+                
+                <!-- Embedded Google Map -->
+                <div class="map-iframe-container" style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(79,172,254,0.1); height: 350px;">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3576.234567890123!2d88.60876543210123!3d27.335678901234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e6a5a5a5a5a5a5%3A0xa5a5a5a5a5a5a5a5!2sEnchey%20Monastery%2C%20Gangtok%2C%20East%20Sikkim!5e0!3m2!1sen!2sin!4v1709876543211!5m2!1sen!2sin"
+                        width="100%" 
+                        height="350" 
+                        style="border:0; border-radius: 20px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Scroll-triggered parallax slideshow effect
+        let ticking = false;
+        
+        function updateScrollEffect() {
+            const scrolled = window.pageYOffset;
+            const heroHeight = window.innerHeight;
+            const scrollProgress = Math.min(scrolled / heroHeight, 1);
+            
+            // Get hero elements
+            const heroSection = document.querySelector('.hero');
+            const heroTitle = document.querySelector('.hero-content h1');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            const heroDescription = document.querySelector('.hero-description');
+            
+            if (heroTitle && heroSubtitle && heroDescription) {
+                // Create dramatic slideshow movement for clearer image
+                const titleOffset = scrollProgress * 150;
+                const subtitleOffset = scrollProgress * 120;
+                const descriptionOffset = scrollProgress * 90;
+                
+                // Apply dramatic transforms with different speeds (slideshow effect)
+                heroTitle.style.transform = `translateY(${titleOffset}px) translateX(${scrollProgress * 100}px) scale(${1 - scrollProgress * 0.3})`;
+                heroSubtitle.style.transform = `translateY(${subtitleOffset}px) translateX(${scrollProgress * -80}px) scale(${1 - scrollProgress * 0.2})`;
+                heroDescription.style.transform = `translateY(${descriptionOffset}px) translateX(${scrollProgress * 60}px) scale(${1 - scrollProgress * 0.1})`;
+                
+                // Aggressive fade effect for clearer image
+                const opacity = Math.max(1 - scrollProgress * 2.5, 0);
+                heroTitle.style.opacity = opacity;
+                heroSubtitle.style.opacity = opacity * 0.8;
+                heroDescription.style.opacity = opacity * 0.7;
+                
+                // Reduce overall section overlay for crystal clear monastery image
+                if (heroSection) {
+                    const overlayOpacity = Math.max(0.1 - scrollProgress * 0.1, 0);
+                    heroSection.style.background = `
+                        linear-gradient(135deg, rgba(255, 255, 255, ${overlayOpacity}) 0%, rgba(255, 255, 255, ${overlayOpacity * 2}) 100%), 
+                        url('images/encheymonas.png') center/cover no-repeat
+                    `;
+                }
+            }
+            
+            ticking = false;
+        }
+        
+        function requestScrollUpdate() {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollEffect);
+                ticking = true;
+            }
+        }
+        
+        // Listen for scroll events
+        window.addEventListener('scroll', requestScrollUpdate);
+        window.addEventListener('load', updateScrollEffect);
+    </script>
+</body>
+</html>

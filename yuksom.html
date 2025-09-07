@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuksom Monastery - Historic Capital</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; }
+        .navbar { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 2rem; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #667eea; text-decoration: none; }
+        .back-btn { background: linear-gradient(45deg, #fa709a, #fee140); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; }
+        /* Stunning Hero Section */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.3) 100%), 
+                        url('images/Yuksom_monatsery.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(250,112,154,0.1) 0%, transparent 70%);
+            animation: heroGlow 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes heroGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .hero-floating-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, rgba(250,112,154,0.9), rgba(254,225,64,0.9));
+            backdrop-filter: blur(15px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.3);
+            z-index: 3;
+            animation: floatingBadge 6s ease-in-out infinite;
+        }
+
+        @keyframes floatingBadge {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .floating-badge-text {
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Beautiful Hero Text Section Below */
+        .hero-text-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            padding: 5rem 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-text-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="rgba(250,112,154,0.05)" opacity="0.8"><animate attributeName="cy" values="25;20;25" dur="10s" repeatCount="indefinite"/></circle><circle cx="75" cy="75" r="1.5" fill="rgba(254,225,64,0.05)" opacity="0.6"><animate attributeName="r" values="1.5;3;1.5" dur="12s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="2.5" fill="rgba(250,112,154,0.03)" opacity="0.4"><animate attributeName="cx" values="50;55;50" dur="14s" repeatCount="indefinite"/></circle></svg>');
+            opacity: 0.4;
+        }
+
+        .hero-text-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-main-content {
+            text-align: left;
+        }
+
+        .hero-stats-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .monastery-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.3));
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .badge-text {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(15px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #fa709a;
+        }
+
+        .stat-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            background: transparent;
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: none;
+            max-width: 800px;
+        }
+        .hero-content h1 { 
+            font-size: 3.5rem; 
+            font-weight: 800; 
+            margin-bottom: 1rem; 
+            text-shadow: 0 4px 20px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.8); 
+            color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease-out;
+        }
+        .hero-subtitle { 
+            font-size: 1.3rem; 
+            margin-bottom: 2rem; 
+            opacity: 0.8; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 1px 5px rgba(0,0,0,0.6);
+            color: rgba(255, 255, 255, 0.85);
+            transition: all 0.3s ease-out;
+        }
+        .hero-description { 
+            font-size: 1.1rem; 
+            line-height: 1.8;
+            margin-bottom: 3rem; 
+            opacity: 0.75; 
+            max-width: 600px; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 1px 5px rgba(0,0,0,0.6);
+            color: rgba(255, 255, 255, 0.8);
+            margin-left: auto;
+            margin-right: auto;
+            transition: all 0.3s ease-out;
+        }
+        .content-section { padding: 8rem 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 3rem; font-weight: 800; text-align: center; margin-bottom: 4rem; color: #1a202c; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .feature-card { background: white; padding: 3rem 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s ease; }
+        .feature-card:hover { transform: translateY(-10px); }
+        .feature-icon { font-size: 3rem; margin-bottom: 1.5rem; }
+        .feature-card h4 { font-size: 1.5rem; margin-bottom: 1rem; color: #1a202c; }
+        .virtual-section { background: #f8fafc; text-align: center; }
+        .tour-preview { width: 200px; height: 200px; background: linear-gradient(45deg, #fa709a, #fee140); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; cursor: pointer; transition: transform 0.3s ease; }
+        .tour-preview:hover { transform: scale(1.1); }
+        .tour-preview span { font-size: 4rem; color: white; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; background: #1a202c; color: white; }
+        .info-card { background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; }
+        .info-icon { font-size: 2rem; margin-bottom: 1rem; }
+
+        /* Map Section Styles - Yuksom (pink ↔ gold theme) */
+        .map-section {
+            background: linear-gradient(180deg, #fff 0%, #fff7f3 100%);
+        }
+        .map-section .section-title {
+            color: #fa709a;
+        }
+        .map-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1.2fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+        .map-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(255,255,255,0.7));
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(250,112,154,0.25);
+            border-radius: 20px;
+            padding: 1.75rem;
+            box-shadow: 0 20px 40px rgba(250,112,154,0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .map-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 28px 56px rgba(250,112,154,0.18);
+        }
+        .map-title {
+            display: inline-block;
+            padding: 10px 18px;
+            background: linear-gradient(45deg, rgba(250,112,154,0.2), rgba(254,225,64,0.25));
+            border: 1px solid rgba(250,112,154,0.35);
+            border-radius: 999px;
+            color: #9b2c55;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+        }
+        .map-info-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .map-info-list li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px dashed rgba(250,112,154,0.25);
+        }
+        .map-info-list li:last-child { border-bottom: none; }
+        .map-info-icon { font-size: 1.2rem; }
+        .map-info-text h4 { margin-bottom: 4px; color: #1a202c; }
+        .map-info-text p { margin: 0; color: #4a5568; }
+        .map-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 1rem;
+            text-decoration: none;
+            background: linear-gradient(45deg, #fa709a, #fee140);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(250,112,154,0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .map-link:hover { transform: translateY(-2px); box-shadow: 0 14px 28px rgba(250,112,154,0.32); }
+        .map-iframe-container {
+            width: 100%;
+            height: 420px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(250,112,154,0.18);
+            border: 1px solid rgba(250,112,154,0.25);
+        }
+        .map-iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: saturate(1.05) contrast(1.02);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            
+            .hero-text-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            
+            .hero-main-content {
+                text-align: center;
+            }
+            
+            .hero-stats-visual {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .hero-floating-badge {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+            
+            .features-grid { grid-template-columns: 1fr; }
+            
+            .map-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+            
+            .map-iframe-container {
+                height: 250px !important;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="monastery360.html" class="logo">Monastery360</a>
+            <a href="monastery360.html" class="back-btn">← Back to Home</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-floating-badge">
+            <div class="floating-badge-text">👑 Royal Birth</div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="monastery-badge">
+                <span class="badge-text">Historic Capital</span>
+            </div>
+            <h1>Yuksom Monastery</h1>
+            <p class="hero-subtitle">Birthplace of Sikkim Kingdom</p>
+        </div>
+    </section>
+    
+    <!-- Hero Text Section with Key Information -->
+    <section class="hero-text-section">
+        <div class="hero-text-container">
+            <div class="hero-text-content">
+                <div class="hero-main-content">
+                    <div class="monastery-badge">
+                        <span class="badge-text">👑 Royal Coronation</span>
+                    </div>
+                    <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.95);">Where Sikkim's Royal Dynasty Began</h2>
+                    <p class="hero-description">The historic monastery near Yuksom, Sikkim's first capital, where in 1642 three wise lamas crowned Phuntsog Namgyal as the first Chogyal, establishing the Kingdom of Sikkim. This sacred site serves as the starting point for major Himalayan treks and preserves the profound legacy of Sikkim's royal heritage amidst breathtaking mountain vistas.</p>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">1642</span>
+                            <span class="hero-stat-label">Coronation</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">First</span>
+                            <span class="hero-stat-label">Capital</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">3</span>
+                            <span class="hero-stat-label">Wise Lamas</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-stats-visual">
+                    <div class="stat-card">
+                        <span class="stat-icon">👑</span>
+                        <div class="stat-value">Royal</div>
+                        <div class="stat-description">Coronation</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🏁</span>
+                        <div class="stat-value">First</div>
+                        <div class="stat-description">Capital</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🥾</span>
+                        <div class="stat-value">Trek</div>
+                        <div class="stat-description">Base</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🏞️</span>
+                        <div class="stat-value">Mountain</div>
+                        <div class="stat-description">Views</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Sacred Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👑</div>
+                    <h4>1642 Coronation</h4>
+                    <p>Historic site where Sikkim's first king was crowned by three wise lamas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏛️</div>
+                    <h4>First Capital</h4>
+                    <p>Located near Yuksom, the first capital city of the Kingdom of Sikkim.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🥾</div>
+                    <h4>Trek Base</h4>
+                    <p>Starting point for popular treks to Kanchenjunga and other peaks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section virtual-section">
+        <div class="container">
+            <h2 class="section-title">Virtual Experience</h2>
+            <div class="tour-preview" onclick="alert('🎥 Virtual Tour Coming Soon!')">
+                <span>🎥</span>
+            </div>
+            <h3>360° Kingdom's Origin</h3>
+            <p>Explore the birthplace of Sikkim's royal heritage</p>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Visit Information</h2>
+            <div class="info-grid">
+                <div class="info-card"><div class="info-icon">📍</div><h4>Location</h4><p>West Sikkim</p></div>
+                <div class="info-card"><div class="info-icon">👑</div><h4>Founded</h4><p>1642 Coronation Site</p></div>
+                <div class="info-card"><div class="info-icon">🥾</div><h4>Activity</h4><p>Trekking Base Camp</p></div>
+                <div class="info-card"><div class="info-icon">🏔️</div><h4>Views</h4><p>Kanchenjunga Range</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Map Section -->
+    <section class="content-section map-section">
+        <div class="container">
+            <h2 class="section-title">Location & Map</h2>
+            <div class="map-grid">
+                <div class="map-card">
+                    <div class="map-title">Yuksom Monastery</div>
+                    <ul class="map-info-list">
+                        <li>
+                            <div class="map-info-icon">📍</div>
+                            <div class="map-info-text">
+                                <h4>Address</h4>
+                                <p>Yuksom, West Sikkim 737113</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="map-info-icon">🧭</div>
+                            <div class="map-info-text">
+                                <h4>Coordinates</h4>
+                                <p>Approx. 27.374° N, 88.258° E</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="map-info-icon">🗺️</div>
+                            <div class="map-info-text">
+                                <h4>Open in Google Maps</h4>
+                                <p>
+                                    <a class="map-link" href="https://maps.app.goo.gl/xAS7niBTBQoLGndg9" target="_blank" rel="noopener">Open Map ↗</a>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="map-iframe-container">
+                    <iframe class="map-iframe" loading="lazy" allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps?q=Yuksom%20Monastery%2C%20Sikkim&output=embed">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Scroll-triggered parallax slideshow effect
+        let ticking = false;
+        
+        function updateScrollEffect() {
+            const scrolled = window.pageYOffset;
+            const heroHeight = window.innerHeight;
+            const scrollProgress = Math.min(scrolled / heroHeight, 1);
+            
+            // Get hero elements
+            const heroSection = document.querySelector('.hero');
+            const heroTitle = document.querySelector('.hero-content h1');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            const heroDescription = document.querySelector('.hero-description');
+            
+            if (heroTitle && heroSubtitle && heroDescription) {
+                // Create dramatic slideshow movement for clearer image
+                const titleOffset = scrollProgress * 150;
+                const subtitleOffset = scrollProgress * 120;
+                const descriptionOffset = scrollProgress * 90;
+                
+                // Apply dramatic transforms with different speeds (slideshow effect)
+                heroTitle.style.transform = `translateY(${titleOffset}px) translateX(${scrollProgress * 100}px) scale(${1 - scrollProgress * 0.3})`;
+                heroSubtitle.style.transform = `translateY(${subtitleOffset}px) translateX(${scrollProgress * -80}px) scale(${1 - scrollProgress * 0.2})`;
+                heroDescription.style.transform = `translateY(${descriptionOffset}px) translateX(${scrollProgress * 60}px) scale(${1 - scrollProgress * 0.1})`;
+                
+                // Aggressive fade effect for clearer image
+                const opacity = Math.max(1 - scrollProgress * 2.5, 0);
+                heroTitle.style.opacity = opacity;
+                heroSubtitle.style.opacity = opacity * 0.8;
+                heroDescription.style.opacity = opacity * 0.7;
+                
+                // Reduce overall section overlay for crystal clear monastery image
+                if (heroSection) {
+                    const overlayOpacity = Math.max(0.1 - scrollProgress * 0.1, 0);
+                    heroSection.style.background = `
+                        linear-gradient(135deg, rgba(255, 255, 255, ${overlayOpacity}) 0%, rgba(255, 255, 255, ${overlayOpacity * 2}) 100%), 
+                        url('images/Yuksom_monatsery.jpg') center/cover no-repeat
+                    `;
+                }
+            }
+            
+            ticking = false;
+        }
+        
+        function requestScrollUpdate() {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollEffect);
+                ticking = true;
+            }
+        }
+        
+        // Listen for scroll events
+        window.addEventListener('scroll', requestScrollUpdate);
+        window.addEventListener('load', updateScrollEffect);
+    </script>
+</body>
+</html>

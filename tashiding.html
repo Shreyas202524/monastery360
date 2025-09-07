@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tashiding Monastery - Sacred Summit</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; }
+        .navbar { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 2rem; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #667eea; text-decoration: none; }
+        .back-btn { background: linear-gradient(45deg, #43e97b, #38f9d7); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; }
+        /* Stunning Hero Section */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.3) 100%), 
+                        url('images/tashiding.png.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(67,233,123,0.1) 0%, transparent 70%);
+            animation: heroGlow 8s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes heroGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 1000px;
+            padding: 3rem;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-floating-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, rgba(67,233,123,0.9), rgba(56,249,215,0.9));
+            backdrop-filter: blur(15px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.3);
+            z-index: 3;
+            animation: floatingBadge 6s ease-in-out infinite;
+        }
+
+        @keyframes floatingBadge {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .floating-badge-text {
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Beautiful Hero Text Section Below */
+        .hero-text-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            padding: 5rem 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-text-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="rgba(67,233,123,0.05)" opacity="0.8"><animate attributeName="cy" values="25;20;25" dur="10s" repeatCount="indefinite"/></circle><circle cx="75" cy="75" r="1.5" fill="rgba(56,249,215,0.05)" opacity="0.6"><animate attributeName="r" values="1.5;3;1.5" dur="12s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="2.5" fill="rgba(67,233,123,0.03)" opacity="0.4"><animate attributeName="cx" values="50;55;50" dur="14s" repeatCount="indefinite"/></circle></svg>');
+            opacity: 0.4;
+        }
+
+        .hero-text-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-main-content {
+            text-align: left;
+        }
+
+        .hero-stats-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .monastery-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.3));
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .badge-text {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.8);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            font-weight: 400;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 1px 5px rgba(0,0,0,0.6);
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            opacity: 0.75;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 1px 5px rgba(0,0,0,0.6);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(15px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #43e97b;
+        }
+
+        .stat-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .content-section { padding: 8rem 2rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 3rem; font-weight: 800; text-align: center; margin-bottom: 4rem; color: #1a202c; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .feature-card { background: white; padding: 3rem 2rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s ease; }
+        .feature-card:hover { transform: translateY(-10px); }
+        .feature-icon { font-size: 3rem; margin-bottom: 1.5rem; }
+        .feature-card h4 { font-size: 1.5rem; margin-bottom: 1rem; color: #1a202c; }
+        .virtual-section { background: #f8fafc; text-align: center; }
+        .tour-preview { width: 200px; height: 200px; background: linear-gradient(45deg, #43e97b, #38f9d7); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; cursor: pointer; transition: transform 0.3s ease; }
+        .tour-preview:hover { transform: scale(1.1); }
+        .tour-preview span { font-size: 4rem; color: white; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; background: #1a202c; color: white; }
+        .info-card { background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; }
+        .info-icon { font-size: 2rem; margin-bottom: 1rem; }
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            
+            .hero-text-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            
+            .hero-main-content {
+                text-align: center;
+            }
+            
+            .hero-stats-visual {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .hero-floating-badge {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+            
+            .features-grid { grid-template-columns: 1fr; }
+            
+            .map-grid {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+            }
+            
+            .map-iframe-container {
+                height: 250px !important;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="monastery360.html" class="logo">Monastery360</a>
+            <a href="monastery360.html" class="back-btn">← Back to Home</a>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-floating-badge">
+            <div class="floating-badge-text">⛰️ Sacred Heart</div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="monastery-badge">
+                <span class="badge-text">Sacred Summit</span>
+            </div>
+            <h1>Tashiding Monastery</h1>
+            <p class="hero-subtitle">The Devoted Central Glory</p>
+        </div>
+    </section>
+    
+    <!-- Hero Text Section with Key Information -->
+    <section class="hero-text-section">
+        <div class="hero-text-container">
+            <div class="hero-text-content">
+                <div class="hero-main-content">
+                    <div class="monastery-badge">
+                        <span class="badge-text">🎯 Sacred Arrow</span>
+                    </div>
+                    <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.95);">Where Guru Rinpoche's Arrow Fell</h2>
+                    <p class="hero-description">Perched on a heart-shaped hilltop overlooking the confluence of the Rathong and Rangeet rivers, Tashiding is revered as one of Sikkim's holiest pilgrimage sites. Legend holds that Guru Padmasambhava shot an arrow into the air, consecrating this sacred ground in the 8th century. Home to the legendary Bhumchu Festival and the miraculous Thongwa Rangdrol chorten.</p>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">1641</span>
+                            <span class="hero-stat-label">Founded</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">4,900ft</span>
+                            <span class="hero-stat-label">Altitude</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">Bhumchu</span>
+                            <span class="hero-stat-label">Festival</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-stats-visual">
+                    <div class="stat-card">
+                        <span class="stat-icon">🎯</span>
+                        <div class="stat-value">Sacred</div>
+                        <div class="stat-description">Arrow Legend</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🏷️</span>
+                        <div class="stat-value">Thongwa</div>
+                        <div class="stat-description">Rangdrol</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🌊</span>
+                        <div class="stat-value">Holy</div>
+                        <div class="stat-description">Water</div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-icon">🙏</span>
+                        <div class="stat-value">Sacred</div>
+                        <div class="stat-description">Pilgrimage</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Legendary Founding and Sacred History Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">A Legendary Founding and Sacred History</h2>
+            <div class="history-content">
+                <p style="font-size: 1.1rem; margin-bottom: 3rem; text-align: center; max-width: 900px; margin-left: auto; margin-right: auto;">Tashiding's history is steeped in legend and sacred lore, deeply connected to the introduction of Buddhism in Sikkim. The monastery is a nexus of Sikkimese faith, history, and breathtaking natural beauty.</p>
+                
+                <div class="guru-legend" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); padding: 3rem; border-radius: 20px; margin-bottom: 3rem; color: #1a202c;">
+                    <div style="text-align: center;">
+                        <h3 style="font-size: 2rem; margin-bottom: 1.5rem; color: #1a202c;">🎯 Guru Padmasambhava's Arrow</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">It is believed that the 8th-century Buddhist master <strong>Guru Padmasambhava (Guru Rinpoche)</strong> shot an arrow into the air, vowing to meditate where it landed.</p>
+                        <p style="font-size: 1rem; font-weight: 600;">The arrow fell on the very hill where the monastery now stands, consecrating the land as sacred ground.</p>
+                    </div>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h4>Sacred Consecration</h4>
+                        <p>The hilltop was blessed by Guru Padmasambhava in the 8th century, making it one of the most sacred sites in Sikkim.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👑</div>
+                        <h4>Founded in 1641</h4>
+                        <p>Formally established by Ngadak Sempa Chempo, one of the three lamas who consecrated Sikkim's first king.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🕉️</div>
+                        <h4>Nyingma Tradition</h4>
+                        <p>Belongs to the Nyingma school of Tibetan Buddhism, the oldest of the four main Buddhist traditions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Architectural and Spiritual Highlights Section -->
+    <section class="content-section" style="background: #f8fafc;">
+        <div class="container">
+            <h2 class="section-title">Architectural and Spiritual Highlights</h2>
+            <div class="architecture-content">
+                <p style="font-size: 1.1rem; margin-bottom: 3rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">The monastery complex is a classic example of traditional Sikkimese monastic architecture, creating an atmosphere of deep serenity and devotion.</p>
+                
+                <div class="thongwa-highlight" style="background: white; padding: 3rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 3rem;">
+                    <div style="text-align: center;">
+                        <h3 style="color: #43e97b; margin-bottom: 1.5rem; font-size: 1.8rem;">✨ Thongwa Rangdrol Chorten</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.7; color: #2d3748;">A key spiritual feature of Tashiding is the sacred <strong>'Thongwa Rangdrol' chorten (stupa)</strong>. It is believed that merely <em>seeing</em> this chorten can cleanse one of their sins, making it one of the most powerful spiritual monuments in Buddhism.</p>
+                    </div>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h4>Vibrant Murals</h4>
+                        <p>Main temple adorned with vibrant murals, intricate paintings, and revered ancient scriptures and religious artifacts.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🗿</div>
+                        <h4>Sacred Chortens</h4>
+                        <p>Complex dotted with numerous stupas, chortens, and fluttering prayer flags creating deep spiritual atmosphere.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚙️</div>
+                        <h4>Mani Lhakhangs</h4>
+                        <p>Small shrines housing prayer wheels that pilgrims spin while circumambulating the sacred site in devotion.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Bhumchu Festival Section -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">The Bhumchu Festival: A Sacred Water Ceremony</h2>
+            <div class="festival-content">
+                <p style="font-size: 1.1rem; margin-bottom: 3rem; text-align: center;">Tashiding is most famous for the <strong>Bhumchu Festival</strong>, one of the most sacred and significant religious events in Sikkim.</p>
+                
+                <div class="bhumchu-festival" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); padding: 3rem; border-radius: 20px; color: #1a202c; margin-bottom: 3rem;">
+                    <div style="text-align: center;">
+                        <h3 style="font-size: 2rem; margin-bottom: 1.5rem; color: #1a202c;">🌊 Sacred Water Prophecy</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.7; margin-bottom: 1.5rem;">Held annually on the 14th and 15th days of the first month of the Tibetan lunar calendar (usually February or March), drawing thousands of devotees from across the Himalayan region.</p>
+                        <p style="font-size: 1rem; font-weight: 600;">The festival centers on opening a sacred pot containing holy water blessed by Guru Padmasambhava himself - the water's level and quality predict Sikkim's fortunes for the coming year.</p>
+                    </div>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏺</div>
+                        <h4>Sacred Pot Ceremony</h4>
+                        <p>Ancient ritual of opening the blessed water pot to divine the coming year's fortune for the entire state.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🙏</div>
+                        <h4>Pilgrimage Gathering</h4>
+                        <p>Thousands of devotees from across the Himalayas gather for this most sacred religious event in Sikkim.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💧</div>
+                        <h4>Blessed Distribution</h4>
+                        <p>Sacred water blessed by Guru Padmasambhava is distributed among pilgrims as a precious spiritual gift.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="content-section virtual-section">
+        <div class="container">
+            <h2 class="section-title">Virtual Experience</h2>
+            <div class="tour-preview" onclick="alert('🎥 Virtual Tour Coming Soon!')">
+                <span>🎥</span>
+            </div>
+            <h3>360° Sacred Summit</h3>
+            <p>Experience the blessed hilltop monastery with breathtaking views</p>
+        </div>
+    </section>
+    
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Visit Information</h2>
+            <div class="info-grid">
+                <div class="info-card"><div class="info-icon">📍</div><h4>Location</h4><p>West Sikkim</p></div>
+                <div class="info-card"><div class="info-icon">⏰</div><h4>Hours</h4><p>6:00 AM - 6:00 PM</p></div>
+                <div class="info-card"><div class="info-icon">🙏</div><h4>Festival</h4><p>Bum-Chu in February</p></div>
+                <div class="info-card"><div class="info-icon">⛰️</div><h4>Views</h4><p>Himalayan panorama</p></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sacred Surroundings & Historic Sites Section -->
+    <section class="content-section" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="25" r="1.5" fill="rgba(255,255,255,0.1)" opacity="0.6"><animate attributeName="cy" values="25;20;25" dur="11s" repeatCount="indefinite"/></circle><circle cx="80" cy="75" r="2" fill="rgba(255,255,255,0.08)" opacity="0.4"><animate attributeName="cx" values="80;85;80" dur="13s" repeatCount="indefinite"/></circle><circle cx="50" cy="50" r="2.5" fill="rgba(255,255,255,0.05)" opacity="0.3"><animate attributeName="r" values="2.5;4;2.5" dur="15s" repeatCount="indefinite"/></circle></svg>'); opacity: 0.3;"></div>
+        
+        <div class="container" style="position: relative; z-index: 2;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <h2 style="font-size: 3rem; font-weight: 800; margin-bottom: 1rem; color: white; text-shadow: 0 4px 20px rgba(0,0,0,0.3);">🏞️ Explore West Sikkim's Sacred Heritage</h2>
+                <p style="font-size: 1.2rem; opacity: 0.9; max-width: 800px; margin: 0 auto;">Discover the mystical attractions and historic royal capitals surrounding Tashiding Monastery in the sacred landscapes of West Sikkim</p>
+            </div>
+            
+            <!-- Nearby Sacred & Historic Attractions Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">👑</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #ffd89b;">Yuksom - First Capital</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Historic Capital • Dubdi Monastery</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">The first capital of Sikkim where three wise lamas crowned the first Chogyal in 1642. Home to Dubdi Monastery, the oldest monastery in Sikkim, offering profound historical significance.</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">🏰</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #ffd89b;">Rabdentse Ruins</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Near Pelling • Second Capital</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">Ruins of the second capital of Sikkim, offering a glimpse into the royal grandeur of the Sikkimese kingdom with spectacular mountain views and historic remnants.</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">💧</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #ffd89b;">Khecheopalri Lake</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">25 km • Sacred Wish Lake</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">A sacred "wish-fulfilling" lake revered by Buddhists and Hindus alike. Crystal-clear waters surrounded by dense forests, believed to grant heartfelt wishes to pure-hearted devotees.</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">💦</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #ffd89b;">Kanchenjunga Falls</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Near Pelling • Natural Wonder</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">Magnificent waterfalls cascading from great heights, named after the world's third-highest peak. A breathtaking display of nature's power set against pristine mountain landscapes.</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">🗿</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #ffd89b;">Ravangla Buddha Park</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">30 km • Giant Buddha</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">Home to a magnificent 130-foot tall statue of Buddha Shakyamuni, one of the tallest Buddha statues in the world, set amidst beautiful gardens with panoramic Himalayan views.</p>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2.5rem; margin-right: 1rem;">🌉</span>
+                        <div>
+                            <h4 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: #ffd89b;">Singshore Bridge</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">25 km from Pelling • Sky Bridge</p>
+                        </div>
+                    </div>
+                    <p style="line-height: 1.6;">One of Sikkim's highest suspension bridges, offering thrilling views of deep valleys and towering peaks. An engineering marvel suspended between mountains at breathtaking heights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Accommodations & Essential Services Section -->
+    <section class="content-section" style="background: #f8fafc;">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <h2 style="font-size: 3rem; font-weight: 800; color: #1a202c; margin-bottom: 1rem;">🏨 Sacred Journey Accommodations & Services</h2>
+                <p style="font-size: 1.2rem; color: #4a5568; max-width: 800px; margin: 0 auto;">Comfortable stays and essential services for your pilgrimage to Tashiding Monastery in West Sikkim's spiritual heartland</p>
+            </div>
+            
+            <!-- Hotel Accommodations by Location -->
+            <div style="margin-bottom: 4rem;">
+                <h3 style="text-align: center; font-size: 2rem; color: #43e97b; margin-bottom: 3rem;">🏨 Accommodation Options by Region</h3>
+                
+                <!-- Yuksom Area Hotels -->
+                <div style="margin-bottom: 3rem;">
+                    <h4 style="font-size: 1.5rem; color: #1a202c; margin-bottom: 2rem; text-align: center;">👑 Yuksom Area (Historic Capital)</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                        <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 50px rgba(67,233,123,0.1); border-left: 5px solid #43e97b; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <span style="font-size: 2.5rem; margin-right: 1rem;">🏠</span>
+                                <div>
+                                    <h4 style="font-size: 1.4rem; color: #1a202c; margin-bottom: 0.5rem;">Hotel Tashiling Residency</h4>
+                                    <p style="color: #43e97b; font-weight: 600;">Yuksom • Budget-Friendly</p>
+                                </div>
+                            </div>
+                            <p style="color: #4a5568; line-height: 1.6;">Comfortable budget accommodation in historic Yuksom, perfect for pilgrims seeking affordable stays near Sikkim's first capital and Dubdi Monastery.</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 50px rgba(67,233,123,0.1); border-left: 5px solid #43e97b; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <span style="font-size: 2.5rem; margin-right: 1rem;">🏡</span>
+                                <div>
+                                    <h4 style="font-size: 1.4rem; color: #1a202c; margin-bottom: 0.5rem;">Local Homestays</h4>
+                                    <p style="color: #43e97b; font-weight: 600;">Near Tashiding • Authentic Village Experience</p>
+                                </div>
+                            </div>
+                            <p style="color: #4a5568; line-height: 1.6;">Authentic village homestays offering genuine Sikkimese hospitality, traditional meals, and an immersive cultural experience in the sacred hills.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pelling & Ravangla Hotels -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 3rem;">
+                    <div>
+                        <h4 style="font-size: 1.5rem; color: #1a202c; margin-bottom: 2rem; text-align: center;">🏔️ Pelling Area</h4>
+                        <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 50px rgba(67,233,123,0.1); border-left: 5px solid #43e97b;">
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <span style="font-size: 2.5rem; margin-right: 1rem;">🏰</span>
+                                <div>
+                                    <h4 style="font-size: 1.4rem; color: #1a202c; margin-bottom: 0.5rem;">Norbu Ghang Resort</h4>
+                                    <p style="color: #43e97b; font-weight: 600;">Pelling • Luxury Mountain Resort</p>
+                                </div>
+                            </div>
+                            <p style="color: #4a5568; line-height: 1.6;">Premium luxury resort offering spectacular Kanchenjunga views, traditional architecture, and world-class amenities in the scenic hill station of Pelling.</p>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 style="font-size: 1.5rem; color: #1a202c; margin-bottom: 2rem; text-align: center;">⛰️ Ravangla Area</h4>
+                        <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 50px rgba(67,233,123,0.1); border-left: 5px solid #43e97b;">
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <span style="font-size: 2.5rem; margin-right: 1rem;">⭐</span>
+                                <div>
+                                    <h4 style="font-size: 1.4rem; color: #1a202c; margin-bottom: 0.5rem;">Hotel Ravangla Star</h4>
+                                    <p style="color: #43e97b; font-weight: 600;">Ravangla • Mid-Range Comfort</p>
+                                </div>
+                            </div>
+                            <p style="color: #4a5568; line-height: 1.6;">Comfortable mid-range accommodation in Ravangla, offering great value with scenic mountain views and easy access to Buddha Park.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Transportation & Emergency Services -->
+            <div style="background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); padding: 3rem; border-radius: 25px; color: white;">
+                <h3 style="text-align: center; font-size: 2rem; color: #38f9d7; margin-bottom: 3rem;">🛡️ Transportation & Safety Services</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                    <!-- Transportation Info -->
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(15px);">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-size: 2rem; margin-right: 1rem;">🚌</span>
+                            <h4 style="color: #38f9d7; font-size: 1.2rem;">Bus Transportation</h4>
+                        </div>
+                        <p style="line-height: 1.6; opacity: 0.9; margin-bottom: 1rem;"><strong>Gyalshing Bus Station:</strong> Main bus terminal for West Sikkim district.</p>
+                        <p style="line-height: 1.6; opacity: 0.9; margin-bottom: 1rem;">SNT Bus Service operates from Gyalshing and Jorethang for connections to Siliguri and Gangtok.</p>
+                        <p style="line-height: 1.6; opacity: 0.9;">Shared jeeps available from Yuksom, Ravangla, and Pelling to Tashiding.</p>
+                    </div>
+                    
+                    <!-- Police Services -->
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(15px);">
+                        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                            <span style="font-size: 2rem; margin-right: 1rem;">🚓</span>
+                            <h4 style="color: #38f9d7; font-size: 1.2rem;">Police Stations</h4>
+                        </div>
+                        <p style="line-height: 1.6; opacity: 0.9; margin-bottom: 0.5rem;"><strong>Tashiding Police Outpost:</strong> Local unit</p>
+                        <p style="line-height: 1.6; opacity: 0.9; margin-bottom: 0.5rem;"><strong>Yuksom Police Station:</strong> Main station</p>
+                        <p style="line-height: 1.6; opacity: 0.9; margin-bottom: 1rem;"><strong>Gyalshing Police Station:</strong> District headquarters</p>
+                        <div style="background: rgba(67,233,123,0.2); padding: 1rem; border-radius: 10px;">
+                            <p style="font-weight: 600; margin-bottom: 0.5rem;">Emergency Numbers:</p>
+                            <p>📞 <strong>100</strong> - Police Emergency</p>
+                            <p>📞 <strong>112</strong> - General Emergency</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Women's Safety Helpline -->
+                <div style="background: rgba(67,233,123,0.2); padding: 2.5rem; border-radius: 20px; border: 2px solid rgba(67,233,123,0.3); text-align: center;">
+                    <h4 style="color: #38f9d7; font-size: 1.5rem; margin-bottom: 1.5rem;">👩 Women's Safety & Helpline Support</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px;">
+                            <h5 style="color: #ffd89b; margin-bottom: 0.5rem;">National Women Helpline</h5>
+                            <p style="font-size: 1.2rem; font-weight: 700;">📞 1091</p>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Works across India, including Sikkim</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px;">
+                            <h5 style="color: #ffd89b; margin-bottom: 0.5rem;">Sikkim State Women Helpline</h5>
+                            <p style="font-size: 1.2rem; font-weight: 700;">📞 181</p>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">State-specific support services</p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; opacity: 0.9; line-height: 1.6;">Additional support available through local women's cells in West Sikkim (Gyalshing). All helplines operate 24/7 with trained personnel ready to assist pilgrims and travelers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Location & Map Section -->
+    <section style="background: #f8fafc; padding: 4rem 2rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 2.5rem; font-weight: 800; color: #43e97b; margin-bottom: 1rem;">📍 Find Tashiding Monastery</h2>
+                <p style="font-size: 1.1rem; color: #4a5568; max-width: 600px; margin: 0 auto;">Perched on a sacred hilltop in West Sikkim, where Guru Rinpoche's arrow fell</p>
+            </div>
+            
+            <div class="map-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
+                <!-- Location Details -->
+                <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 15px 40px rgba(67,233,123,0.1); border-left: 5px solid #43e97b;">
+                    <h3 style="color: #43e97b; margin-bottom: 2rem; font-size: 1.5rem;">⭐ Sacred Hilltop Location</h3>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                            <span style="font-size: 1.2rem; margin-right: 0.8rem;">📍</span>
+                            <strong style="color: #1a202c;">Address:</strong>
+                        </div>
+                        <p style="color: #4a5568; margin-left: 2rem;">Tashiding, West Sikkim 737 102, India</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                            <span style="font-size: 1.2rem; margin-right: 0.8rem;">🚗</span>
+                            <strong style="color: #1a202c;">Distance:</strong>
+                        </div>
+                        <p style="color: #4a5568; margin-left: 2rem;">40km from Gyalshing, accessible from Yuksom and Pelling</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <div style="display: flex; align-items: center; margin-bottom: 0.8rem;">
+                            <span style="font-size: 1.2rem; margin-right: 0.8rem;">⏱️</span>
+                            <strong style="color: #1a202c;">Travel Time:</strong>
+                        </div>
+                        <p style="color: #4a5568; margin-left: 2rem;">1.5-2 hours from Pelling, 1 hour from Yuksom</p>
+                    </div>
+                    
+                    <a href="https://maps.app.goo.gl/buQLUrmwvmvxmDSA7" target="_blank" 
+                       style="display: inline-block; background: linear-gradient(45deg, #43e97b, #38f9d7); color: white; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: transform 0.3s ease;"
+                       onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        🗺️ Open in Google Maps
+                    </a>
+                </div>
+                
+                <!-- Embedded Google Map -->
+                <div class="map-iframe-container" style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(67,233,123,0.1); height: 350px;">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3576.834567890123!2d88.25123456789012!3d27.345678901234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e6a4a4a4a4a4a4%3A0xa4a4a4a4a4a4a4a4!2sTashiding%20Monastery%2C%20West%20Sikkim!5e0!3m2!1sen!2sin!4v1709876543212!5m2!1sen!2sin"
+                        width="100%" 
+                        height="350" 
+                        style="border:0; border-radius: 20px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Scroll-triggered parallax slideshow effect
+        let ticking = false;
+        
+        function updateScrollEffect() {
+            const scrolled = window.pageYOffset;
+            const heroHeight = window.innerHeight;
+            const scrollProgress = Math.min(scrolled / heroHeight, 1);
+            
+            // Get hero elements
+            const heroSection = document.querySelector('.hero');
+            const heroTitle = document.querySelector('.hero-content h1');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+            const heroDescription = document.querySelector('.hero-description');
+            
+            if (heroTitle && heroSubtitle && heroDescription) {
+                // Create dramatic slideshow movement for clearer image
+                const titleOffset = scrollProgress * 150;
+                const subtitleOffset = scrollProgress * 120;
+                const descriptionOffset = scrollProgress * 90;
+                
+                // Apply dramatic transforms with different speeds (slideshow effect)
+                heroTitle.style.transform = `translateY(${titleOffset}px) translateX(${scrollProgress * 100}px) scale(${1 - scrollProgress * 0.3})`;
+                heroSubtitle.style.transform = `translateY(${subtitleOffset}px) translateX(${scrollProgress * -80}px) scale(${1 - scrollProgress * 0.2})`;
+                heroDescription.style.transform = `translateY(${descriptionOffset}px) translateX(${scrollProgress * 60}px) scale(${1 - scrollProgress * 0.1})`;
+                
+                // Aggressive fade effect for clearer image
+                const opacity = Math.max(1 - scrollProgress * 2.5, 0);
+                heroTitle.style.opacity = opacity;
+                heroSubtitle.style.opacity = opacity * 0.8;
+                heroDescription.style.opacity = opacity * 0.7;
+                
+                // Reduce overall section overlay for crystal clear monastery image
+                if (heroSection) {
+                    const overlayOpacity = Math.max(0.1 - scrollProgress * 0.1, 0);
+                    heroSection.style.background = `
+                        linear-gradient(135deg, rgba(255, 255, 255, ${overlayOpacity}) 0%, rgba(255, 255, 255, ${overlayOpacity * 2}) 100%), 
+                        url('images/tashiding.png.jpg') center/cover no-repeat
+                    `;
+                }
+            }
+            
+            ticking = false;
+        }
+        
+        function requestScrollUpdate() {
+            if (!ticking) {
+                requestAnimationFrame(updateScrollEffect);
+                ticking = true;
+            }
+        }
+        
+        // Listen for scroll events
+        window.addEventListener('scroll', requestScrollUpdate);
+        window.addEventListener('load', updateScrollEffect);
+    </script>
+</body>
+</html>
